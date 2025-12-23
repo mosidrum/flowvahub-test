@@ -25,20 +25,43 @@ It features a "Premium" dark-themed UI, reusable components, and a Supabase-read
   - Transaction history view.
 
 ## Setup
-1. **Supabase**:
-   - Create a `.env` file in the root:
-     ```
-     VITE_SUPABASE_URL=your_project_url
-     VITE_SUPABASE_ANON_KEY=your_anon_key
-     ```
-   - If not provided, the app runs in "Demo Mode" with simulated data.
 
-2. **Run**:
-   ```bash
-   npm run dev
+### 1. Supabase Configuration
+1. Create a new Supabase project.
+2. Go to the **SQL Editor** in your Supabase dashboard.
+3. Open the `supabase_schema.sql` file provided in this repository.
+4. Copy the entire content and run it in the SQL Editor. This will:
+   - Create `profiles`, `rewards`, and `transactions` tables.
+   - Set up Row Level Security (RLS) policies.
+   - Create a trigger to automatically create a profile for new users.
+   - Insert default rewards into the catalog.
+5. Create a `.env` file in the root directory:
+   ```env
+   VITE_SUPABASE_URL=your_project_url
+   VITE_SUPABASE_ANON_KEY=your_anon_key
    ```
 
-## Database Schema (Expected)
-For the real data fetching to work, ensure these tables exist in Supabase:
-- `profiles` (`id` uuid PK, `points_balance` int)
-- `user_tasks` (`id`, `user_id`, `title`, `points`, `completed` boolean)
+### 2. Run Locally
+```bash
+npm install
+npm run dev
+```
+
+## Database Schema
+The SQL migration sets up the following structure:
+- **`profiles`**: Linked to `auth.users`. Stores `points` (default 0), `streak_days`, `referral_code`.
+- **`rewards`**: Catalog of items. Contains `cost`, `status`, `icon_type`.
+- **`transactions`**: Ledger of points earned and redeemed.
+
+## Authentication
+This project uses Supabase Magic Links for passwordless authentication.
+- When you first run the app, you will be redirected to the Login page.
+- Enter your email to receive a Magic Link.
+- Once clicked, you will be logged in and redirected to the Rewards Dashboard.
+- A user profile is automatically created upon first sign-up.
+
+## Features
+- **Real-time Data**: Fetches point balance, streak, and rewards status directly from Supabase.
+- **Dynamic Lock/Unlock**: Rewards automatically unlock when your points balance exceeds their cost.
+- **Redemption**: securely decrements points and records a transaction in the database.
+- **Responsive Design**: Mobile-friendly layout using modern SCSS grids and flexbox.

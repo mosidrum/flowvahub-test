@@ -1,0 +1,111 @@
+// _variables.scss
+
+// Core Colors - Extracted from Design
+$color-purple-50: #f5f3ff;
+$color-purple-100: #ede9fe;
+$color-purple-500: #8b5cf6;
+$color-purple-600: #7c3aed;
+$color-purple-700: #6d28d9;
+$color-purple-900: #4c1d95; // Deep purple for text/bold
+
+$color-yellow-400: #facc15; // Gold coin color
+$color-green-500: #22c55e; // Success/Money
+
+$color-gray-50: #f9fafb;
+$color-gray-100: #f3f4f6;
+$color-gray-200: #e5e7eb;
+$color-gray-300: #d1d5db;
+$color-gray-400: #9ca3af;
+$color-gray-500: #6b7280;
+$color-gray-600: #4b5563;
+$color-gray-800: #1f2937;
+$color-gray-900: #111827;
+
+$color-white: #ffffff;
+
+// Semantic Colors (Light Theme)
+$bg-app: $color-white; // Main layout bg might be gray-50, but sidebar is white
+$bg-main: $color-white;
+$bg-sidebar: $color-white;
+$bg-card: $color-white;
+
+$text-primary: $color-gray-900;
+$text-secondary: $color-gray-500;
+$text-tertiary: $color-gray-400;
+
+$primary-brand: $color-purple-600;
+$primary-light: $color-purple-50;
+
+$border-color: $color-gray-200;
+
+// Gradients
+$gradient-purple: linear-gradient(135deg, #a855f7 0%, #d946ef 100%); // Example gradient for "Featured"
+
+// Typography
+$font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+$font-family-display: 'Outfit', sans-serif;
+
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+$font-size-5xl: 3rem; // For large streak numbers
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing
+$spacing-1: 0.25rem;
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-5: 1.25rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-10: 2.5rem;
+
+// Radius
+$radius-sm: 0.375rem;
+$radius-md: 0.5rem;
+$radius-lg: 0.75rem;
+$radius-xl: 1rem;
+$radius-2xl: 1.5rem;
+$radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+$shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+
+// Transitions
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Aliases & Missing Vars (Backwards Compatibility)
+$color-primary-400: #a78bfa;
+$color-primary-500: $color-purple-500;
+$color-error: #ef4444;
+$color-slate-700: $color-gray-500; // Mock for mixin
+$color-slate-800: $color-gray-800; // Mock for shadows?
+
+$bg-surface: $color-white;
+$bg-surface-hover: $color-gray-50;
+$bg-glass: rgba(255, 255, 255, 0.8);
+$gradient-primary: $gradient-purple;
+
+$shadow-md: $shadow-card;
+$shadow-lg: $shadow-hover;
+$shadow-glow: 0 0 15px rgba($color-purple-500, 0.3);
+
+// More Comaptibiliy Aliases
+$color-primary-600: $color-purple-600;
+$color-slate-50: $color-gray-50;
+$color-slate-400: $color-gray-400;
+$color-slate-900: $color-gray-900;
+$color-slate-950: #000000;

@@ -1,0 +1,28 @@
+// main.scss
+@use 'variables' as *;
+@use 'reset';
+
+:root {
+    --font-sans: #{$font-family-sans};
+    --font-display: #{$font-family-display};
+    --bg-app: #{$bg-app};
+    --text-primary: #{$text-primary};
+    --color-primary-500: #{$color-primary-500};
+}
+
+body {
+    font-family: $font-family-sans;
+    background-color: $bg-app;
+    color: $text-primary;
+}
+
+// Global utility classes if needed (optional, keeping it clean)
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 $spacing-4;
+
+    @media (min-width: 1024px) {
+        padding: 0 $spacing-8;
+    }
+}
