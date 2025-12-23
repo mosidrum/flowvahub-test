@@ -43,12 +43,25 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
     const { signOut, user } = useAuth();
     const navigate = useNavigate();
     const [showProfileMenu, setShowProfileMenu] = useState(false);
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
+    const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
     const profileMenuRef = useRef<HTMLDivElement>(null);
 
     // Extract user name from email or use default
     const userName = user?.user_metadata?.name || user?.email?.split('@')[0] || 'User';
     const userEmail = user?.email || 'user@example.com';
+
+    // Handle window resize to detect mobile
+    useEffect(() => {
+        const handleResize = () => {
+            const mobile = window.innerWidth <= 640;
+            setIsMobile(mobile);
+            setSidebarOpen(!mobile);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Close profile menu when clicking outside
     useEffect(() => {
@@ -75,7 +88,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
             </button>
 
             {/* Sidebar Overlay for Mobile */}
-            {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
+            {sidebarOpen && isMobile && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
 
             <aside className={`sidebar ${sidebarOpen ? 'sidebar--open' : ''}`}>
                 <div className="sidebar__logo">
