@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { DashboardLayout } from './components/layout/DashboardLayout';
 import { RewardsPage } from './pages/Rewards/RewardsPage';
 import { LoginPage } from './pages/Auth/LoginPage';
+import { SignupPage } from './pages/Auth/SignupPage';
 import { useAuth } from './contexts/AuthContext';
 import './styles/main.scss';
 
@@ -16,21 +17,40 @@ const App = () => {
         );
     }
 
-    if (!user) {
-        return <LoginPage />;
-    }
-
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Navigate to="/dashboard/earn-rewards" replace />} />
+                {/* Public Routes */}
                 <Route
-                    path="/dashboard/earn-rewards"
+                    path="/login"
+                    element={!user ? <LoginPage /> : <Navigate to="/dashboard/earn-rewards" replace />}
+                />
+                <Route
+                    path="/signup"
+                    element={!user ? <SignupPage /> : <Navigate to="/dashboard/earn-rewards" replace />}
+                />
+
+                {/* Protected Routes */}
+                <Route
+                    path="/dashboard/*"
                     element={
-                        <DashboardLayout>
-                            <RewardsPage />
-                        </DashboardLayout>
+                        user ? (
+                            <DashboardLayout>
+                                <Routes>
+                                    <Route path="earn-rewards" element={<RewardsPage />} />
+                                    <Route path="*" element={<Navigate to="earn-rewards" replace />} />
+                                </Routes>
+                            </DashboardLayout>
+                        ) : (
+                            <Navigate to="/login" replace />
+                        )
                     }
+                />
+
+                {/* Root Redirect */}
+                <Route
+                    path="/"
+                    element={<Navigate to={user ? "/dashboard/earn-rewards" : "/login"} replace />}
                 />
             </Routes>
         </Router>
