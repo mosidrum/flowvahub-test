@@ -1,0 +1,117 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.btn {
+    @include flex-center;
+    position: relative;
+    font-family: $font-family-sans;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-lg;
+    transition: all $transition-fast;
+    overflow: hidden;
+    user-select: none;
+
+    @include focus-ring;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    // Variants
+    &--primary {
+        background: $color-primary-600;
+        color: white;
+        box-shadow: $shadow-md;
+
+        &:not(:disabled):hover {
+            background: $color-primary-500;
+            box-shadow: $shadow-glow;
+        }
+
+        &:not(:disabled):active {
+            transform: translateY(1px);
+        }
+    }
+
+    &--secondary {
+        background: $bg-surface-hover;
+        color: $text-primary;
+        border: 1px solid $border-color;
+
+        &:not(:disabled):hover {
+            background: $bg-surface;
+            border-color: $text-secondary;
+        }
+    }
+
+    &--outline {
+        background: transparent;
+        border: 1px solid $color-primary-500;
+        color: $color-primary-400;
+
+        &:not(:disabled):hover {
+            background: rgba($color-primary-500, 0.1);
+        }
+    }
+
+    &--ghost {
+        background: transparent;
+        color: $text-secondary;
+
+        &:not(:disabled):hover {
+            background: rgba($color-slate-800, 0.5);
+            color: $text-primary;
+        }
+    }
+
+    // Sizes
+    &--sm {
+        padding: 0 $spacing-3;
+        height: 32px;
+        font-size: $font-size-sm;
+    }
+
+    &--md {
+        padding: 0 $spacing-5;
+        height: 40px;
+        font-size: $font-size-sm;
+    }
+
+    &--lg {
+        padding: 0 $spacing-8;
+        height: 48px;
+        font-size: $font-size-base;
+    }
+
+    // Modifiers
+    &--full-width {
+        width: 100%;
+    }
+
+    // Elements
+    &__spinner {
+        animation: spin 1s linear infinite;
+        margin-right: $spacing-2;
+    }
+
+    &__icon-left {
+        margin-right: $spacing-2;
+        display: flex;
+    }
+
+    &__icon-right {
+        margin-left: $spacing-2;
+        display: flex;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
