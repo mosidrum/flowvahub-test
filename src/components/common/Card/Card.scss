@@ -1,0 +1,52 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.card {
+    border-radius: $radius-xl;
+    overflow: hidden;
+    transition: all $transition-normal;
+    position: relative;
+
+    // Variants
+    &--default {
+        background: $bg-surface;
+        border: 1px solid $border-color;
+    }
+
+    &--glass {
+        @include glass-effect;
+    }
+
+    &--outlined {
+        background: transparent;
+        border: 1px solid $border-color;
+    }
+
+    // Padding
+    &--padding-none {
+        padding: 0;
+    }
+
+    &--padding-sm {
+        padding: $spacing-3;
+    }
+
+    &--padding-md {
+        padding: $spacing-5;
+    }
+
+    &--padding-lg {
+        padding: $spacing-8;
+    }
+
+    // Modifiers
+    &--hoverable {
+        cursor: pointer;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: $shadow-lg;
+            border-color: $text-secondary;
+        }
+    }
+}
