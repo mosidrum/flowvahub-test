@@ -1,0 +1,125 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.refer-banner {
+    background: linear-gradient(to right, #eff6ff, #f5f3ff);
+    border-radius: $radius-xl;
+    overflow: hidden;
+
+    .refer-stats-row {
+        display: flex;
+        background: white;
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        padding: $spacing-4;
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            border-right: 1px solid $border-color;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            .stat-value {
+                font-size: $font-size-2xl;
+                font-weight: $font-weight-bold;
+                color: $primary-brand;
+            }
+
+            .stat-label {
+                font-size: $font-size-xs;
+                color: $text-secondary;
+                text-transform: uppercase;
+                font-weight: $font-weight-semibold;
+                letter-spacing: 0.05em;
+            }
+        }
+    }
+
+    .referral-link-section {
+        padding: $spacing-6;
+
+        .referral-input-group {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid $border-color;
+            border-radius: $radius-md;
+            padding: $spacing-2;
+            margin-bottom: $spacing-6;
+            transition: border-color 0.2s;
+
+            &:focus-within {
+                border-color: $primary-brand;
+                box-shadow: 0 0 0 2px rgba($primary-brand, 0.1);
+            }
+
+            .referral-input {
+                flex: 1;
+                border: none;
+                outline: none;
+                background: transparent;
+                font-size: $font-size-sm;
+                color: $text-secondary;
+                padding: 0 $spacing-2;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .copy-btn {
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                padding: $spacing-1;
+                border-radius: $radius-md;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    background: $color-purple-50;
+                }
+            }
+        }
+
+        .social-share-row {
+            display: flex;
+            justify-content: center;
+            gap: $spacing-4;
+
+            .social-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: $radius-full;
+                border: none;
+                cursor: pointer;
+                @include flex-center;
+                transition: transform $transition-fast;
+                color: white;
+
+                &:hover {
+                    transform: translateY(-2px);
+                }
+
+                &.facebook {
+                    background: #1877F2;
+                }
+
+                &.x-twitter {
+                    background: black;
+                }
+
+                &.linkedin {
+                    background: #0A66C2;
+                }
+
+                &.whatsapp {
+                    background: #25D366;
+                }
+            }
+        }
+    }
+}

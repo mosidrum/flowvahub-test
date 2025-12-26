@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card } from '../../../components/common/Card/Card';
 import { Text } from '../../../components/common/Text/Text';
-import { Star, Rocket, Coins, Calendar, Zap, Monitor, Gift } from 'lucide-react';
+import { Award, Rocket, Coins, Calendar, Zap, Monitor, Gift } from 'lucide-react';
+import './RewardsStats.scss';
 
 interface RewardsStatsProps {
     points: number;
@@ -22,16 +23,15 @@ export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCh
     return (
         <section>
             <div className="section-title">
-                <Text variant="h4" weight="bold">Your Rewards Journey</Text>
+                <Text variant="h4" weight="medium">Your Rewards Journey</Text>
             </div>
 
             <div className="journey-grid">
-                {/* Points Balance Card */}
-                <Card className="points-balance-card" padding="lg" hoverable>
+                <Card className="points-balance-card" hoverable>
                     <div className="balance-left">
                         <div className="flex items-center gap-2 mb-2">
                             <div className="p-1 rounded bg-purple-100 text-purple-600">
-                                <Star size={16} className="text-purple-600" />
+                                <Award size={16} className="text-purple-600" />
                             </div>
                             <Text variant="body" weight="medium" color="secondary">Points Balance</Text>
                         </div>

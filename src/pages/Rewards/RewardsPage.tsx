@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRewardsData } from '../../hooks/useRewardsData';
-import { RewardsHeader } from './components/RewardsHeader';
 import { RewardsStats } from './components/RewardsStats';
 import { EarnSection } from './components/EarnSection';
 import { ReferralSection } from './components/ReferralSection';
@@ -9,7 +8,7 @@ import './RewardsPage.scss';
 import {Text} from "../../components/common/Text/Text.tsx";
 import {Bell} from "lucide-react";
 
-export const RewardsPage: React.FC = () => {
+export const RewardsPage = () => {
     const {
         points,
         streak,

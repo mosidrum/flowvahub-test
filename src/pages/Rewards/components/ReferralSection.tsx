@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text } from '../../../components/common/Text/Text';
 import { Users, Copy } from 'lucide-react';
+import './ReferralSection.scss';
 
 interface ReferralSectionProps {
     referralCode?: string;
@@ -18,7 +19,7 @@ export const ReferralSection: React.FC<ReferralSectionProps> = ({ referralCode =
     return (
         <section className="mt-12 mb-12">
             <div className="section-title">
-                <Text variant="h4" weight="bold">Refer & Earn</Text>
+                <Text variant="h4" weight="medium">Refer & Earn</Text>
             </div>
 
             <div className="refer-banner">

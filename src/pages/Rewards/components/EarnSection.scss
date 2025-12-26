@@ -1,0 +1,30 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.earn-more-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-6;
+
+    @include desktop {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.icon-circle-purple-outline {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-full;
+    border: 1px solid $color-purple-100;
+    @include flex-center;
+    flex-shrink: 0;
+}
+
+.icon-circle-purple-filled {
+    width: 40px;
+    height: 40px;
+    border-radius: $radius-full;
+    background: $color-purple-100;
+    @include flex-center;
+    flex-shrink: 0;
+}

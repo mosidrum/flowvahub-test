@@ -3,12 +3,13 @@ import { Card } from '../../../components/common/Card/Card';
 import { Text } from '../../../components/common/Text/Text';
 import { Button } from '../../../components/common/Button/Button';
 import { Star, Share2 } from 'lucide-react';
+import './EarnSection.scss';
 
 export const EarnSection: React.FC = () => {
     return (
         <section className="mt-12">
             <div className="section-title">
-                <Text variant="h4" weight="bold">Earn More Points</Text>
+                <Text variant="h4" weight="medium">Earn More Points</Text>
             </div>
 
             <div className="earn-more-grid">
