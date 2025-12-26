@@ -1,82 +1,108 @@
-# Flowva Hub Rewards Page Implementation
+# Flowva Hub Rewards Implementation
 
-## Overview
-This project recreates the Flowva Hub Rewards page using a modern React + SCSS architecture.
-It features a "Premium" dark-themed UI, reusable components, and a Supabase-ready backend integration.
+## 🚀 Overview
+This repository contains the source code for the **Flowva Hub Rewards** system, a premium, gamified loyalty interface built with **React**, **SCSS**, and **Supabase**. It features a modern, responsive design with glassmorphism effects, smooth animations, and robust backend logic ensuring data integrity.
 
-## Architecture
-- **Tech Stack**: React (Vite), SCSS (Sass), Supabase Client, Lucide React (Icons).
-- **Structure**:
-  - `src/styles/`: Global SCSS variables, mixins, and reset.
-  - `src/components/common/`: Atomic components (Button, Text, Card).
-  - `src/components/layout/`: Dashboard layout shell.
-  - `src/pages/Rewards/`: The Rewards page logic and specific styles.
-  - `src/lib/`: Support utilities (Supabase client).
+## ✨ Key Features
+- **Premium UI/UX**: High-quality design with glassmorphism, gradient accents, and micro-interactions.
+- **Component-Based Architecture**: Modularized codebase (`RewardsStats`, `EarnSection`, etc.) for maintainability.
+- **Real-Time Data**: Live points balance, streak tracking, and transaction history powered by Supabase.
+- **Gamification**:
+  - **Randomized Onboarding**: New users start with random points (50-500) and streaks (1-7 days) to simulate an active account.
+  - **Daily Check-in**: "Claim Today's Points" feature with a custom animated **Success Toast** (flowers & sparkles).
+  - **Progress Tracking**: Visual progress bars towards reward goals.
+- **Secure Transactions**: All point modifications rely on atomic **PostgreSQL RPC functions** (`claim_daily_points`, `redeem_reward`) to prevent client-side tampering.
+- **Mobile Responsive**: Fully optimized layouts for mobile, tablet, and desktop screens.
 
-## Features
-- **Design System**: A scalable SCSS variable system for colors, typography, and spacing.
-- **Components**: 
-  - `Text`: Polymorphic text component with variants.
-  - `Button`: Interactive buttons with loading states and variants.
-  - `Card`: Container component with glassmorphism support.
-- **Rewards Logic**:
-  - Fetches user points and history from Supabase (mocked for demo if no credentials).
-  - "Daily Streak" visualization.
-  - Transaction history view.
+## 🛠️ Tech Stack
+- **Frontend**: React 19, Vite, TypeScript
+- **Styling**: SCSS (Modules, Mixins, Variables), BEM methodology
+- **Icons**: Lucide React
+- **Backend & Database**: Supabase (PostgreSQL, Auth, RLS)
 
-## Setup
+---
 
-### 1. Supabase Configuration
-1. Create a new Supabase project.
-2. Go to the **SQL Editor** in your Supabase dashboard.
-3. Open the `supabase_schema.sql` file provided in this repository.
-4. Copy the entire content and run it in the SQL Editor. This will:
-   - Create `profiles`, `rewards`, and `transactions` tables.
-   - Set up Row Level Security (RLS) policies.
-   - **Important**: Create the `redeem_reward` and `daily_check_in` Database Functions (RPCs) required for secure data handling.
-   - Create a trigger to automatically create a profile for newly signed-up users.
-   - Insert default rewards into the catalog.
-5. Create a `.env` file in the root directory:
-   ```env
-   VITE_SUPABASE_URL=your_project_url
-   VITE_SUPABASE_ANON_KEY=your_anon_key
-   ```
+## ⚙️ Setup Instructions
 
-### 2. Run Locally
+### 1. Prerequisites
+- Node.js (v18+)
+- A [Supabase](https://supabase.com/) account (Free tier works perfectly)
+
+### 2. Supabase Configuration
+1.  **Create a Project**: Start a new project in Supabase.
+2.  **Database Setup**:
+    - Navigate to the **SQL Editor** in your Supabase dashboard.
+    - Open the `supabase_schema.sql` file located in the root of this project.
+    - Copy the **entire content** and execute it in the SQL Editor.
+    - **What this does:**
+        - Creates tables: `profiles`, `rewards`, `transactions`.
+        - Sets up Row Level Security (RLS) policies.
+        - Deploys RPC functions: `claim_daily_points()` and `redeem_reward()`.
+        - Creates a Trigger: `handle_new_user` to auto-create profiles with random initial data on signup.
+        - Seeds initial Rewards data.
+3.  **Authentication**:
+    - Go to **Authentication** -> **Providers** and ensure **Email/Password** or **Magic Link** is enabled.
+
+### 3. Environment Variables
+Create a `.env` file in the root directory of the project:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+*Found in Supabase Dashboard -> Project Settings -> API*
+
+### 4. Installation & Run
 ```bash
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
 ```
 
-## Database Schema & Architecture
-The SQL migration sets up the following structure:
+---
 
-**Tables:**
-- **`profiles`**: Linked to `auth.users`. Stores `points` (default 0), `streak_days`, `referral_code`.
-- **`rewards`**: Catalog of items. Contains `cost`, `status`, `icon_type`.
-- **`transactions`**: Immutable ledger of all points earned and redeemed.
+## 📂 Project Structure
 
-**Security & Logic (RPCs):**
-This project treats the database as the source of truth for logic to ensure data integrity.
-- **`daily_check_in()`**: Atomically handles checking if a user has already checked in today, increments streak/points, and logs the transaction.
-- **`redeem_reward(reward_id)`**: Atomically verifies balance, deducts points, and logs the redemption transaction to prevent race conditions or balance tampering.
+```
+src/
+├── components/
+│   ├── common/         # Atomic components (Text, Card, Button, Toast)
+│   └── layout/         # Dashboard shell & Sidebar
+├── hooks/
+│   └── useRewardsData.ts # Centralized logic for Supabase data fetching & RPCs
+├── pages/
+│   └── Rewards/
+│       ├── components/    # Sub-components (Stats, Earn, Referral, List)
+│       ├── RewardsPage.tsx # Main entry point
+│       └── RewardsPage.scss # Layout styles
+├── styles/
+│   ├── _mixins.scss    # Responsive breakpoints & flex helpers
+│   ├── _utilities.scss # Common utility classes
+│   └── _variables.scss # Design tokens (Colors, Spacing, Typography)
+└── lib/
+    └── supabase.ts     # Supabase client usage
+```
 
-## Authentication
-This project uses Supabase Magic Links for passwordless authentication.
-- When you first run the app, you will be redirected to the Login page.
-- Enter your email to receive a Magic Link.
-- Once clicked, you will be logged in and redirected to the Rewards Dashboard.
-- A user profile is automatically created upon first sign-up via a Postgres Trigger.
+## 🔒 Database Architecture & Security
 
-## Features
-- **Real-time Data**: Fetches point balance, streak, and rewards status directly from Supabase.
-- **Dynamic Lock/Unlock**: Rewards automatically unlock when your points balance exceeds their cost.
-- **Atomic Redemptions**: Uses Postgres transactions to ensure points are never lost or double-spent.
-- **Responsive Design**: Mobile-friendly layout using modern SCSS grids and flexbox.
+This project moves critical business logic to the database layer to ensure security.
 
-## Senior Developer Review Notes
-This codebase has been refactored to meet production standards:
-- **Separation of Concerns**: The monolithic `RewardsPage` has been decomposed into focused sub-components (`RewardsStats`, `RewardList`, etc.).
-- **Data Integrity**: Logic for points and redemptions has been moved from the client-side to the database (RPCs) to prevent client-side manipulation.
-- **Performance**: `useRewardsData` now uses `Promise.all` for parallel data fetching.
-- **Error Handling**: Improved error states and return types for hook actions.
+### RPC Functions (Server-Side Logic)
+Instead of updating the `points` column directly from the frontend (which is insecure), the app calls these functions:
+
+1.  **`claim_daily_points()`**:
+    - Checks if the user already checked in today.
+    - Atomically increments points (+5) and streak (+1).
+    - Logs a transaction record.
+    - Returns success/failure to the client.
+
+2.  **`redeem_reward(reward_id)`**:
+    - Checks user balance against reward cost.
+    - Atomically deducts points.
+    - logs a 'redeem' transaction.
+    - Updates user balance.
+
+### Triggers
+- **`handle_new_user`**: Automatically generates a user profile entry in `public.profiles` whenever a new user signs up via `auth.users`, population it with realistic random "starter" data.
