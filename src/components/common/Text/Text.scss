@@ -4,7 +4,6 @@
 .text {
     margin: 0;
 
-    // Variants
     &--h1 {
         font-family: $font-family-display;
         font-size: $font-size-4xl;
@@ -45,7 +44,6 @@
         line-height: 1.5;
     }
 
-    // Weights
     &--weight-regular {
         font-weight: $font-weight-regular;
     }
@@ -62,7 +60,6 @@
         font-weight: $font-weight-bold;
     }
 
-    // Colors
     &--color-primary {
         color: $text-primary;
     }
@@ -83,7 +80,6 @@
         color: inherit;
     }
 
-    // Gradient
     &--gradient {
         @include text-gradient;
     }

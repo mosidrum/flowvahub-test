@@ -1,6 +1,5 @@
 @use 'variables' as *;
 
-// Flexbox utilities
 .flex {
     display: flex;
 }
@@ -25,7 +24,6 @@
     justify-content: space-between;
 }
 
-// Gap utilities
 .gap-2 {
     gap: $spacing-2;
 }
@@ -34,7 +32,6 @@
     gap: $spacing-3;
 }
 
-// Margin utilities
 .mt-4 {
     margin-top: $spacing-4;
 }
@@ -59,12 +56,10 @@
     margin-bottom: $spacing-10;
 }
 
-// Padding utilities
 .p-6 {
     padding: $spacing-6;
 }
 
-// Text utilities
 .text-xs {
     font-size: $font-size-xs;
 }
@@ -73,7 +68,6 @@
     color: $primary-brand;
 }
 
-// Margin utilities
 .mr-2 {
     margin-right: $spacing-2;
 }
