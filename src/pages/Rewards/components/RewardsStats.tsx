@@ -31,7 +31,7 @@ export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCh
                     <div className="points-balance-card">
                         <div className="flex items-center gap-2 mb-2 top">
                             <div className="p-1 rounded bg-purple-100 text-purple-600">
-                                <Award size={16} className="text-purple-600" />
+                                <Award size={26} className="text-purple-600" />
                             </div>
                             <Text variant="body" weight="medium" color="secondary">Points Balance</Text>
                         </div>
@@ -59,7 +59,6 @@ export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCh
                     </div>
                 </Card>
 
-                {/* Daily Streak Card */}
                 <Card className="daily-streak-card" padding="lg" hoverable>
                     <div className="flex items-center gap-2 mb-2">
                         <Calendar size={18} className="text-blue-400" />

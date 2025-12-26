@@ -249,7 +249,6 @@ export const SignupPage: React.FC = () => {
                             {status === 'loading' ? 'Creating Account...' : 'Sign up Account'}
                         </Button>
 
-                        {/* Google Sign In Placeholder */}
                         <div className="divider">
                             <div className="divider-line">
                                 <span />

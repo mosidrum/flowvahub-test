@@ -13,7 +13,6 @@ export const EarnSection: React.FC = () => {
             </div>
 
             <div className="earn-more-grid">
-                {/* Refer Win Card */}
                 <Card padding="lg" className="flex flex-col h-full" hoverable>
                     <div className="flex items-start gap-3">
                         <div className="icon-circle-purple-outline">
@@ -28,7 +27,6 @@ export const EarnSection: React.FC = () => {
                     </div>
                 </Card>
 
-                {/* Share Stack Card */}
                 <Card padding="lg" className="flex flex-col h-full" hoverable>
                     <div className="flex items-start gap-3 mb-6">
                         <div className="icon-circle-purple-filled">

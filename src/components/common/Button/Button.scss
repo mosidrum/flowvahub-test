@@ -20,12 +20,12 @@
 
     // Variants
     &--primary {
-        background: $color-primary-600;
+        background: $primary-brand;
         color: white;
         box-shadow: $shadow-md;
 
         &:not(:disabled):hover {
-            background: $color-primary-500;
+            background: $primary-brand;
             box-shadow: $shadow-glow;
         }
 
@@ -47,11 +47,11 @@
 
     &--outline {
         background: transparent;
-        border: 1px solid $color-primary-500;
-        color: $color-primary-400;
+        border: 1px solid $primary-brand;
+        color: $primary-brand;
 
         &:not(:disabled):hover {
-            background: rgba($color-primary-500, 0.1);
+            background: rgba($primary-brand, 0.1);
         }
     }
 
@@ -60,7 +60,7 @@
         color: $text-secondary;
 
         &:not(:disabled):hover {
-            background: rgba($color-slate-800, 0.5);
+            background: rgba($color-gray, 0.5);
             color: $text-primary;
         }
     }

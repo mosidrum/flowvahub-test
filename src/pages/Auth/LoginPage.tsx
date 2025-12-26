@@ -145,7 +145,6 @@ export const LoginPage: React.FC = () => {
                         {status === 'loading' ? 'Signing In...' : 'Sign in'}
                     </Button>
 
-                    {/* Google Sign In Placeholder */}
                     <div className="divider">
                         <div className="divider-line">
                             <span />

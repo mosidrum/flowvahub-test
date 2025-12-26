@@ -35,7 +35,6 @@ export const useRewardsData = () => {
         try {
             setError(null);
 
-            // Parallel fetching for performance
             const [profileResult, rewardsResult] = await Promise.all([
                 supabase
                     .from('profiles')
@@ -50,7 +49,6 @@ export const useRewardsData = () => {
 
             if (profileResult.error) {
                 console.error('Error fetching profile:', profileResult.error);
-                // Handle missing profile case gracefully if needed
             } else if (profileResult.data) {
                 setPoints(profileResult.data.points);
                 setStreak(profileResult.data.streak_days);
@@ -76,7 +74,6 @@ export const useRewardsData = () => {
         if (!user) return { success: false, message: 'Not authenticated' };
 
         try {
-            // Use RPC for atomic transaction
             const { data, error } = await supabase.rpc('redeem_reward', {
                 reward_id: reward.id
             });
@@ -84,7 +81,6 @@ export const useRewardsData = () => {
             if (error) throw error;
 
             if (data && data.success) {
-                // Update local state to reflect change immediately without full refetch
                 setPoints(data.remaining_points);
                 return { success: true };
             } else {

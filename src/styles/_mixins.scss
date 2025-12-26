@@ -52,6 +52,6 @@
 @mixin focus-ring {
     &:focus-visible {
         outline: none;
-        box-shadow: 0 0 0 2px $bg-app, 0 0 0 4px $color-primary-500;
+        box-shadow: 0 0 0 2px $bg-app, 0 0 0 4px $primary-brand;
     }
 }
