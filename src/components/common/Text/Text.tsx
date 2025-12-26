@@ -4,7 +4,7 @@ import './Text.scss';
 
 type TextVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'caption' | 'small';
 type TextWeight = 'regular' | 'medium' | 'semibold' | 'bold';
-type TextColor = 'default' | 'primary' | 'secondary';
+type TextColor = 'default' | 'primary' | 'secondary' | 'white';
 
 interface TextProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;

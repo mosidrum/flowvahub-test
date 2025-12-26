@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card } from '../../../components/common/Card/Card';
 import { Text } from '../../../components/common/Text/Text';
-import { Award, Rocket, Calendar, Zap, Monitor, Gift } from 'lucide-react';
+import { Award, Rocket, Calendar, Zap, UserPlus, Gift } from 'lucide-react';
 import coin from '../../../assets/14563581.png'
+import logo from '../../../assets/reclaim-logo.png'
 import './RewardsStats.scss';
 
 interface RewardsStatsProps {
@@ -104,29 +105,36 @@ export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCh
                     </div>
                 </Card>
 
-                {/* Featured Tool Spotlight */}
-                <div className="card spotlight-card p-6 rounded-2xl card--hoverable">
-                    <div className="spotlight-badge">Featured</div>
-                    <Text variant="h4" weight="bold" className="text-white mt-2">Top Tool Spotlight</Text>
-                    <Text variant="body" className="text-white/90 font-bold text-xl mt-1 mb-4">Reclaim</Text>
+                <div className="card spotlight-card rounded-2xl card--hoverable">
+                    <div className="bg flex justify-between p-6">
+                       <div>
+                           <div className="spotlight-badge">Featured</div>
+                           <Text variant="h4" weight="bold" color="white">Top Tool Spotlight</Text>
+                           <Text variant="body" color="white" weight="bold" className="mt-1 mb-4">Reclaim</Text>
+                       </div>
+                        <img src={logo} alt="Reclaim.ai logo" width="76" height="76" />
 
-                    <div className="bg-white/20 p-4 rounded-lg mb-4 text-xs text-white/90 leading-relaxed">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Calendar size={16} />
-                            <span className="font-bold">Automate and Optimize Your Schedule</span>
-                        </div>
-                        Reclaim.ai is an AI-powered calendar assistant that automatically schedules your tasks.
                     </div>
 
-                    <div className="spotlight-actions mt-auto">
-                        <button className="btn-signup text-purple-600 bg-white">
-                            <span className="flex items-center gap-1 font-bold">
-                                <Monitor size={14} /> Sign up
+                        <div className="flex items-start gap-2 p-4">
+                            <Calendar size={90} className="text-purple-600 calendar" />
+                            <div>
+                                <Text variant="caption" weight="bold">Automate and Optimize Your Schedule
+                                </Text>
+                                <Text variant="caption">Reclaim.ai is an AI-powered calendar assistant that automatically schedules your tasks, meetings, and breaks to boost productivity.<br />
+                                    Free to try — earn Flowva Points when you sign up!</Text>
+                            </div>
+                        </div>
+
+                    <div className="spotlight-actions p-6 mt-auto">
+                        <button className="bg">
+                            <span className="flex items-center gap-2">
+                                <UserPlus size={16} color="white" /> <Text variant="caption" color="white">Sign up</Text>
                             </span>
                         </button>
-                        <button className="btn-claim bg-white/20 text-white">
-                            <span className="flex items-center gap-1 font-medium">
-                                <Gift size={14} /> Claim 50 pts
+                        <button className="bg">
+                            <span className="flex items-center gap-2">
+                                <Gift size={16} color="white" /> <Text variant="caption" color="white">Claim 50 pts</Text>
                             </span>
                         </button>
                     </div>

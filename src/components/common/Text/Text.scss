@@ -72,6 +72,10 @@
         color: #4b5563;
     }
 
+    &--color-white {
+        color: #ffffff;
+    }
+
     &--gradient {
         @include text-gradient;
     }

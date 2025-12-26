@@ -63,7 +63,7 @@
 .daily-streak-card {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    //flex: 1;
     justify-content: space-between;
 
     .top {
@@ -141,11 +141,18 @@
 }
 
 .spotlight-card {
-    background: linear-gradient(135deg, $primary-brand 0%, #3b82f6 100%);
     color: white;
     border: none;
     display: flex;
     flex-direction: column;
+
+    .bg {
+        background: linear-gradient(135deg, $primary-brand 0%, #3b82f6 100%);
+    }
+
+    .calendar {
+        margin-top: -24px;
+    }
 
     .spotlight-badge {
         background: rgba(255, 255, 255, 0.2);
@@ -154,12 +161,13 @@
         font-size: $font-size-xs;
         font-weight: $font-weight-bold;
         align-self: flex-start;
+        width: fit-content;
         margin-bottom: $spacing-2;
     }
 
     .spotlight-actions {
         display: flex;
-        gap: $spacing-2;
+        gap: $spacing-5;
 
         button {
             flex: 1;
@@ -167,11 +175,6 @@
             border-radius: $radius-full;
             height: 36px;
             @include flex-center;
-        }
-
-        .btn-signup {
-            background: white;
-            color: $primary-brand;
         }
 
         .btn-claim {
