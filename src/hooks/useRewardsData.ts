@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -26,123 +26,96 @@ export const useRewardsData = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchData = async () => {
-        try {
-            if (!user) {
-                setLoading(false);
-                return;
-            }
-
-            setLoading(true);
-            setError(null);
-
-            // 1. Fetch Profile
-            const { data: profile, error: profileError } = await supabase
-                .from('profiles')
-                .select('points, streak_days, referral_code')
-                .eq('id', user.id)
-                .single();
-
-            if (profileError) {
-                // If no profile (maybe trigger didn't fire or legacy user), default to 0
-                console.error('Error fetching profile:', profileError);
-            } else if (profile) {
-                setPoints(profile.points);
-                setStreak(profile.streak_days);
-                setReferralCode(profile.referral_code);
-            }
-
-            // 2. Fetch Rewards
-            const { data: rewardsData, error: rewardsError } = await supabase
-                .from('rewards')
-                .select('*')
-                .order('cost', { ascending: true });
-
-            if (rewardsError) throw rewardsError;
-
-            // Map DB Types to UI Types if needed
-            setRewards(rewardsData as Reward[]);
-
-        } catch (err: any) {
-            console.error('Error in useRewardsData:', err);
-            setError(err.message);
-        } finally {
+    const fetchData = useCallback(async () => {
+        if (!user) {
             setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, [user]);
-
-    // Action: Redeem
-    const redeemReward = async (reward: Reward) => {
-        if (!user) return;
-        if (points < reward.cost) {
-            alert("Not enough points!");
             return;
         }
 
         try {
-            // Optimistic Update
-            setPoints(prev => prev - reward.cost);
+            setError(null);
 
-            // 1. Create Transaction
-            const { error: txError } = await supabase
-                .from('transactions')
-                .insert({
-                    user_id: user.id,
-                    amount: -reward.cost,
-                    type: 'redeem',
-                    description: `Redeemed ${reward.title}`
-                });
+            // Parallel fetching for performance
+            const [profileResult, rewardsResult] = await Promise.all([
+                supabase
+                    .from('profiles')
+                    .select('points, streak_days, referral_code')
+                    .eq('id', user.id)
+                    .single(),
+                supabase
+                    .from('rewards')
+                    .select('*')
+                    .order('cost', { ascending: true })
+            ]);
 
-            if (txError) throw txError;
+            if (profileResult.error) {
+                console.error('Error fetching profile:', profileResult.error);
+                // Handle missing profile case gracefully if needed
+            } else if (profileResult.data) {
+                setPoints(profileResult.data.points);
+                setStreak(profileResult.data.streak_days);
+                setReferralCode(profileResult.data.referral_code);
+            }
 
-            // 2. Update Profile
-            // Note: In real app, do this via RPC to ensure atomicity
-            const { error: updateError } = await supabase
-                .from('profiles')
-                .update({ points: points - reward.cost })
-                .eq('id', user.id);
-
-            if (updateError) throw updateError;
-
-            alert(`Succesfully redeemed: ${reward.title}`);
-            fetchData(); // Refresh to be safe
+            if (rewardsResult.error) throw rewardsResult.error;
+            setRewards(rewardsResult.data as Reward[]);
 
         } catch (err: any) {
+            console.error('Error in useRewardsData:', err);
+            setError(err.message || 'Failed to load rewards data');
+        } finally {
+            setLoading(false);
+        }
+    }, [user]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const redeemReward = async (reward: Reward): Promise<{ success: boolean; message?: string }> => {
+        if (!user) return { success: false, message: 'Not authenticated' };
+
+        try {
+            // Use RPC for atomic transaction
+            const { data, error } = await supabase.rpc('redeem_reward', {
+                reward_id: reward.id
+            });
+
+            if (error) throw error;
+
+            if (data && data.success) {
+                // Update local state to reflect change immediately without full refetch
+                setPoints(data.remaining_points);
+                return { success: true };
+            } else {
+                return { success: false, message: data?.error || 'Redemption failed' };
+            }
+        } catch (err: any) {
             console.error('Redemption failed:', err);
-            alert('Redemption failed. Please try again.');
-            fetchData(); // Rollback/Refresh
+            return { success: false, message: err.message || 'An unexpected error occurred' };
         }
     };
 
-    // Action: Earn (Mock/Demo)
-    const checkIn = async () => {
-        if (!user) return;
+    const checkIn = async (): Promise<{ success: boolean; message?: string }> => {
+        if (!user) return { success: false, message: 'Not authenticated' };
+
         try {
-            const bonus = 5;
-            setPoints(prev => prev + bonus);
-            setStreak(prev => prev + 1);
+            const { data, error } = await supabase.rpc('daily_check_in');
 
-            await supabase.from('transactions').insert({
-                user_id: user.id,
-                amount: bonus,
-                type: 'earn',
-                description: 'Daily Check-in'
-            });
+            if (error) throw error;
 
-            await supabase.from('profiles').update({
-                points: points + bonus,
-                streak_days: streak + 1,
-                last_check_in: new Date().toISOString()
-            }).eq('id', user.id);
-
-        } catch (err) {
-            console.error(err);
+            if (data && data.success) {
+                setPoints(prev => prev + 5);
+                setStreak(prev => prev + 1);
+                return { success: true };
+            } else {
+                return { success: false, message: data?.error || 'Check-in failed' };
+            }
+        } catch (err: any) {
+            console.error('Check-in failed:', err);
+            return { success: false, message: err.message };
         }
-    }
+    };
 
     return {
         points,
@@ -152,6 +125,7 @@ export const useRewardsData = () => {
         loading,
         error,
         redeemReward,
-        checkIn
+        checkIn,
+        refresh: fetchData
     };
 };

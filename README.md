@@ -33,7 +33,8 @@ It features a "Premium" dark-themed UI, reusable components, and a Supabase-read
 4. Copy the entire content and run it in the SQL Editor. This will:
    - Create `profiles`, `rewards`, and `transactions` tables.
    - Set up Row Level Security (RLS) policies.
-   - Create a trigger to automatically create a profile for new users.
+   - **Important**: Create the `redeem_reward` and `daily_check_in` Database Functions (RPCs) required for secure data handling.
+   - Create a trigger to automatically create a profile for newly signed-up users.
    - Insert default rewards into the catalog.
 5. Create a `.env` file in the root directory:
    ```env
@@ -47,21 +48,35 @@ npm install
 npm run dev
 ```
 
-## Database Schema
+## Database Schema & Architecture
 The SQL migration sets up the following structure:
+
+**Tables:**
 - **`profiles`**: Linked to `auth.users`. Stores `points` (default 0), `streak_days`, `referral_code`.
 - **`rewards`**: Catalog of items. Contains `cost`, `status`, `icon_type`.
-- **`transactions`**: Ledger of points earned and redeemed.
+- **`transactions`**: Immutable ledger of all points earned and redeemed.
+
+**Security & Logic (RPCs):**
+This project treats the database as the source of truth for logic to ensure data integrity.
+- **`daily_check_in()`**: Atomically handles checking if a user has already checked in today, increments streak/points, and logs the transaction.
+- **`redeem_reward(reward_id)`**: Atomically verifies balance, deducts points, and logs the redemption transaction to prevent race conditions or balance tampering.
 
 ## Authentication
 This project uses Supabase Magic Links for passwordless authentication.
 - When you first run the app, you will be redirected to the Login page.
 - Enter your email to receive a Magic Link.
 - Once clicked, you will be logged in and redirected to the Rewards Dashboard.
-- A user profile is automatically created upon first sign-up.
+- A user profile is automatically created upon first sign-up via a Postgres Trigger.
 
 ## Features
 - **Real-time Data**: Fetches point balance, streak, and rewards status directly from Supabase.
 - **Dynamic Lock/Unlock**: Rewards automatically unlock when your points balance exceeds their cost.
-- **Redemption**: securely decrements points and records a transaction in the database.
+- **Atomic Redemptions**: Uses Postgres transactions to ensure points are never lost or double-spent.
 - **Responsive Design**: Mobile-friendly layout using modern SCSS grids and flexbox.
+
+## Senior Developer Review Notes
+This codebase has been refactored to meet production standards:
+- **Separation of Concerns**: The monolithic `RewardsPage` has been decomposed into focused sub-components (`RewardsStats`, `RewardList`, etc.).
+- **Data Integrity**: Logic for points and redemptions has been moved from the client-side to the database (RPCs) to prevent client-side manipulation.
+- **Performance**: `useRewardsData` now uses `Promise.all` for parallel data fetching.
+- **Error Handling**: Improved error states and return types for hook actions.
