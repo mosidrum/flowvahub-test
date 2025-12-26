@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card } from '../../../components/common/Card/Card';
 import { Text } from '../../../components/common/Text/Text';
-import { Award, Rocket, Coins, Calendar, Zap, Monitor, Gift } from 'lucide-react';
+import { Award, Rocket, Calendar, Zap, Monitor, Gift } from 'lucide-react';
+import coin from '../../../assets/14563581.png'
 import './RewardsStats.scss';
 
 interface RewardsStatsProps {
@@ -30,63 +31,68 @@ export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCh
                 <Card  hoverable>
                     <div className="points-balance-card">
                         <div className="flex items-center gap-2 mb-2 top">
-                            <div className="p-1 rounded bg-purple-100 text-purple-600">
-                                <Award size={26} className="text-purple-600" />
+                            <div className="p-1 rounded text-purple-600">
+                                <Award size={26} />
                             </div>
-                            <Text variant="body" weight="medium" color="secondary">Points Balance</Text>
+                            <Text variant="body" weight="medium">Points Balance</Text>
                         </div>
 
-                        <div className="balance-large">{points.toLocaleString()}</div>
+                       <div className="p-6">
+                           <div className="flex items-center justify-between mb-2">
+                               <div className="balance-large">{points.toLocaleString()}</div>
+                               <img src={coin} alt="gold coin" width="44" height="44" />
+                           </div>
 
-                        <div className="w-full mt-4">
-                            <div className="flex justify-between mb-1">
-                                <Text variant="small" color="secondary">Progress to next reward ($5)</Text>
-                                <Text variant="small" weight="bold">{Math.min(points, 5000)}/5000</Text>
-                            </div>
-                            <div className="progress-bar">
-                                <div className="fill" style={{ width: `${Math.min((points / 5000) * 100, 100)}%` }}></div>
-                            </div>
-                        </div>
+                           <div className="w-full mt-4">
+                               <div className="flex justify-between mb-1">
+                                   <Text variant="small" color="secondary">Progress to next reward ($5)</Text>
+                                   <Text variant="small" weight="bold">{Math.min(points, 5000)}/5000</Text>
+                               </div>
+                               <div className="progress-bar">
+                                   <div className="fill" style={{ width: `${Math.min((points / 5000) * 100, 100)}%` }}></div>
+                               </div>
+                           </div>
 
-                        <div className="flex items-center gap-2 mt-4 text-xs text-gray-500">
-                            <Rocket size={14} className="text-red-400" />
-                            <span>Keep earning to unlock more rewards!</span>
-                        </div>
-                    </div>
-
-                    <div className="coin-icon-wrapper">
-                        <Coins size={48} fill="#facc15" />
+                           <div className="flex items-center gap-2 mt-4 text-xs text-gray-500">
+                               <Rocket size={14} className="text-red-400" />
+                               <span>Keep earning to unlock more rewards!</span>
+                           </div>
+                       </div>
                     </div>
                 </Card>
 
-                <Card className="daily-streak-card" padding="lg" hoverable>
-                    <div className="flex items-center gap-2 mb-2">
-                        <Calendar size={18} className="text-blue-400" />
-                        <Text variant="body" weight="medium" color="secondary">Daily Streak</Text>
-                    </div>
-
-                    <div className="streak-count">
-                        {streak} <span className="unit">days</span>
-                    </div>
-
-                    <div className="week-row">
-                        {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
-                            <div key={i} className={`day-circle ${i < (streak % 7) ? 'active' : ''}`}>
-                                {d}
+                <Card className="daily-streak-card" hoverable>
+                        <div className="flex items-center gap-2 mb-2 top">
+                            <div className="p-1 rounded text-blue-400">
+                                <Calendar size={26}  />
                             </div>
-                        ))}
-                    </div>
-
-                    <Text variant="small" color="secondary" className="text-center mb-4">
-                        Check in daily to to earn +5 points
-                    </Text>
-
-                    <button className="claim-btn" onClick={handleCheckIn}>
-                        <div className="flex items-center justify-center">
-                            <Zap size={18} fill="white" />
-                            Claim Today's Points
+                            <Text variant="body" weight="medium">Daily Streak</Text>
                         </div>
-                    </button>
+
+                    <div className="p-6">
+                        <div className="streak-count">
+                            {streak} <span className="unit">days</span>
+                        </div>
+
+                        <div className="week-row">
+                            {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
+                              <div key={i} className={`day-circle ${i < (streak % 7) ? 'active' : ''}`}>
+                                  {d}
+                              </div>
+                            ))}
+                        </div>
+
+                        <Text variant="small" color="secondary" className="text-center mb-4">
+                            Check in daily to to earn +5 points
+                        </Text>
+
+                        <button className="claim-btn" onClick={handleCheckIn}>
+                            <div className="flex items-center justify-center">
+                                <Zap size={18} fill="white" />
+                                Claim Today's Points
+                            </div>
+                        </button>
+                    </div>
                 </Card>
 
                 {/* Featured Tool Spotlight */}

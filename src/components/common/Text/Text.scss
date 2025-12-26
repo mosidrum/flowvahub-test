@@ -60,24 +60,16 @@
         font-weight: $font-weight-bold;
     }
 
+    &--color-default {
+        color: #000000;
+    }
+
     &--color-primary {
-        color: $text-primary;
+        color: #9013fe;
     }
 
     &--color-secondary {
-        color: $text-secondary;
-    }
-
-    &--color-tertiary {
-        color: $text-tertiary;
-    }
-
-    &--color-accent {
-        color: $primary-brand;
-    }
-
-    &--color-inherit {
-        color: inherit;
+        color: #4b5563;
     }
 
     &--gradient {

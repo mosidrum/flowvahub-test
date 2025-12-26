@@ -63,7 +63,13 @@
 .daily-streak-card {
     display: flex;
     flex-direction: column;
+    flex: 1;
     justify-content: space-between;
+
+    .top {
+        background-color: $card-top;
+        padding: $spacing-4;
+    }
 
     .streak-count {
         font-size: $font-size-4xl;

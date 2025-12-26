@@ -4,7 +4,7 @@ import './Text.scss';
 
 type TextVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'caption' | 'small';
 type TextWeight = 'regular' | 'medium' | 'semibold' | 'bold';
-type TextColor = 'primary' | 'secondary' | 'tertiary' | 'accent' | 'inherit';
+type TextColor = 'default' | 'primary' | 'secondary';
 
 interface TextProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
@@ -18,7 +18,7 @@ export const Text: React.FC<TextProps> = ({
   as,
   variant = 'body',
   weight = 'regular',
-  color = 'primary',
+  color = 'default',
   gradient = false,
   className,
   children,
