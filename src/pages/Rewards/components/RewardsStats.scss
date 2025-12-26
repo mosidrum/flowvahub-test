@@ -44,11 +44,15 @@
         color: $primary-brand;
         line-height: 1;
         margin: $spacing-4 0;
+
+        @include mobile {
+            font-size: 2.5rem; // Reduce size on mobile
+        }
     }
 
     .progress-bar {
         height: 8px;
-        background: $color-gray;
+        background: $bg-surface-hover;
         border-radius: $radius-full;
         margin-top: $spacing-2;
         overflow: hidden;
@@ -80,6 +84,14 @@
         .unit {
             font-size: $font-size-3xl;
             font-weight: $font-weight-bold;
+
+            @include mobile {
+                font-size: $font-size-2xl;
+            }
+        }
+
+        @include mobile {
+            font-size: $font-size-3xl;
         }
     }
 
@@ -87,6 +99,10 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: $spacing-4;
+
+        @include mobile {
+            gap: $spacing-1; // Ensure tight spacing works on small screens
+        }
 
         .day-circle {
             width: 36px;
@@ -99,6 +115,12 @@
             font-weight: $font-weight-medium;
             position: relative;
             z-index: 1;
+
+            @include mobile {
+                width: 32px;
+                height: 32px;
+                font-size: 10px;
+            }
 
             &.active {
                 background: $primary-brand;
@@ -151,7 +173,12 @@
     }
 
     .calendar {
-        margin-top: -24px;
+        flex-shrink: 0;
+
+        @include mobile {
+            width: 24px;
+            height: 24px;
+        }
     }
 
     .spotlight-badge {
@@ -169,12 +196,19 @@
         display: flex;
         gap: $spacing-5;
 
+        @include mobile {
+            flex-direction: column;
+            gap: $spacing-2;
+        }
+
         button {
             flex: 1;
             font-size: $font-size-xs;
             border-radius: $radius-full;
             height: 36px;
+            padding: 8px;
             @include flex-center;
+            display: flex;
         }
 
         .btn-claim {

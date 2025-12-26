@@ -1,0 +1,118 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.success-toast {
+    position: fixed;
+    top: $spacing-6;
+    right: $spacing-6;
+    z-index: 1000;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+
+    &.visible {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .toast-content {
+        background: white;
+        border-radius: $radius-lg;
+        padding: $spacing-4 $spacing-6;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+        border: 1px solid rgba($color-green, 0.2);
+        position: relative;
+        overflow: hidden;
+        min-width: 300px;
+    }
+
+    .icon-container {
+        width: 32px;
+        height: 32px;
+        background: rgba($color-green, 0.1);
+        border-radius: $radius-full;
+        @include flex-center;
+        color: $color-green;
+        flex-shrink: 0;
+    }
+
+    .text-content {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            font-weight: $font-weight-bold;
+            font-size: $font-size-sm;
+            color: $text-primary;
+        }
+
+        .message {
+            font-size: $font-size-xs;
+            color: $text-secondary;
+        }
+    }
+
+    .decorations {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+
+        .flower,
+        .sparkle {
+            position: absolute;
+            color: #f472b6; // Pinkish flower color
+            opacity: 0;
+        }
+
+        .flower.f1 {
+            top: 10%;
+            right: 15%;
+            animation: popIn 0.5s 0.2s forwards;
+            color: #f472b6;
+        }
+
+        .flower.f2 {
+            bottom: 15%;
+            right: 30%;
+            animation: popIn 0.5s 0.4s forwards;
+            color: #a78bfa; // Purple flower
+        }
+
+        .sparkle.s1 {
+            top: 40%;
+            right: 10%;
+            animation: popIn 0.5s 0.3s forwards;
+            color: $color-yellow;
+        }
+
+        .sparkle.s2 {
+            bottom: 30%;
+            left: 10%;
+            animation: popIn 0.5s 0.5s forwards;
+            color: $color-yellow;
+        }
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0) rotate(-45deg);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.2) rotate(10deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}

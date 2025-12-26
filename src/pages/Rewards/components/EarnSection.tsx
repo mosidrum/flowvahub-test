@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from '../../../components/common/Card/Card';
 import { Text } from '../../../components/common/Text/Text';
-import { Button } from '../../../components/common/Button/Button';
 import { Star, Share2 } from 'lucide-react';
 import './EarnSection.scss';
 
@@ -13,21 +12,20 @@ export const EarnSection: React.FC = () => {
             </div>
 
             <div className="earn-more-grid">
-                <Card padding="lg" className="flex flex-col h-full" hoverable>
+                <Card padding="lg" className="flex flex-col h-full p-4" hoverable>
                     <div className="flex items-start gap-3">
                         <div className="icon-circle-purple-outline">
                             <Star size={20} className="text-purple-600" />
                         </div>
                         <div>
                             <Text variant="body" weight="bold" className="mb-4">Refer and win 10,000 points!</Text>
-                            <Text variant="small" color="secondary" className="leading-relaxed">
-                                Invite 3 friends by Nov 20 and earn a chance to be one of 5 winners.
-                            </Text>
+                            <Text variant="caption" color="secondary" className="leading-relaxed">
+                                Invite 3 friends by Nov 20 and earn a chance to be one of 5 winners of <span className="text-purple-600">10,000 points.</span> Friends must complete onboarding to qualify.                            </Text>
                         </div>
                     </div>
                 </Card>
 
-                <Card padding="lg" className="flex flex-col h-full" hoverable>
+                <Card padding="lg" className="flex flex-col h-full p-4" hoverable>
                     <div className="flex items-start gap-3 mb-6">
                         <div className="icon-circle-purple-filled">
                             <Share2 size={20} className="text-purple-600" />
@@ -39,10 +37,11 @@ export const EarnSection: React.FC = () => {
                     </div>
 
                     <div className="mt-auto flex justify-between items-center">
-                        <Text variant="small" weight="medium">Share your tool stack</Text>
-                        <Button variant="ghost" className="text-purple-600 hover:bg-purple-50">
-                            <Share2 size={16} className="mr-2" /> Share
-                        </Button>
+                        <Text variant="caption" weight="medium">Share your tool stack</Text>
+                        <div className="flex items-center btn">
+                            <Share2 size={16} className="mr-2" />
+                            <Text>Share</Text>
+                        </div>
                     </div>
                 </Card>
             </div>

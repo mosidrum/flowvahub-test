@@ -28,3 +28,9 @@
     @include flex-center;
     flex-shrink: 0;
 }
+
+.btn {
+    background: rgba($primary-brand, 0.1);
+    padding: $spacing-2 $spacing-4;
+    border-radius: $radius-full;
+}

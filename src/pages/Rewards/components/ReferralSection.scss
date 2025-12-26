@@ -13,6 +13,10 @@
         border-bottom: 1px solid $border-color;
         padding: $spacing-4;
 
+        @include mobile {
+            padding: $spacing-2; // Compact padding
+        }
+
         .stat-item {
             flex: 1;
             text-align: center;
@@ -26,6 +30,10 @@
                 font-size: $font-size-2xl;
                 font-weight: $font-weight-bold;
                 color: $primary-brand;
+
+                @include mobile {
+                    font-size: $font-size-xl;
+                }
             }
 
             .stat-label {
@@ -34,12 +42,20 @@
                 text-transform: uppercase;
                 font-weight: $font-weight-semibold;
                 letter-spacing: 0.05em;
+
+                @include mobile {
+                    font-size: 10px;
+                }
             }
         }
     }
 
     .referral-link-section {
         padding: $spacing-6;
+
+        @include mobile {
+            padding: $spacing-4;
+        }
 
         .referral-input-group {
             display: flex;

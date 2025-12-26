@@ -96,7 +96,7 @@ export const useRewardsData = () => {
         if (!user) return { success: false, message: 'Not authenticated' };
 
         try {
-            const { data, error } = await supabase.rpc('daily_check_in');
+            const { data, error } = await supabase.rpc('claim_daily_points');
 
             if (error) throw error;
 
