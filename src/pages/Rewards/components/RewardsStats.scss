@@ -78,7 +78,8 @@
         margin: $spacing-2 0 $spacing-4;
 
         .unit {
-            font-size: $font-size-2xl;
+            font-size: $font-size-3xl;
+            font-weight: $font-weight-bold;
         }
     }
 
@@ -88,20 +89,37 @@
         margin-bottom: $spacing-4;
 
         .day-circle {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: $radius-full;
-            background: $color-gray;
+            background: $time-bg;
             color: $text-secondary;
             @include flex-center;
             font-size: $font-size-xs;
             font-weight: $font-weight-medium;
+            position: relative;
+            z-index: 1;
 
             &.active {
                 background: $primary-brand;
                 color: white;
             }
+
+            &.today {
+                color: $primary-brand;
+                font-weight: $font-weight-bold;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    inset: -4px;
+                    border-radius: $radius-full;
+                    border: 2px solid $primary-brand;
+                    pointer-events: none;
+                }
+            }
         }
+
     }
 
     .claim-btn {

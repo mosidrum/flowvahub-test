@@ -12,6 +12,8 @@ interface RewardsStatsProps {
 }
 
 export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCheckIn }) => {
+    const todayIndex = (new Date().getDay() + 6) % 7;
+
     const handleCheckIn = async () => {
         const result = await onCheckIn();
         if (result.success) {
@@ -76,7 +78,14 @@ export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCh
 
                         <div className="week-row">
                             {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
-                              <div key={i} className={`day-circle ${i < (streak % 7) ? 'active' : ''}`}>
+                              <div
+                                key={i}
+                                className={[
+                                    'day-circle',
+                                    i < (streak % 7) ? 'active' : '',
+                                    i === todayIndex ? 'today' : '',
+                                ].join(' ')}
+                              >
                                   {d}
                               </div>
                             ))}
