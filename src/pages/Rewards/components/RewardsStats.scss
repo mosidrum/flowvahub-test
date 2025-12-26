@@ -29,8 +29,15 @@
 
 .points-balance-card {
     display: flex;
+    flex-direction: column;
+    flex: 1;
     justify-content: space-between;
-    align-items: center;
+
+    .top {
+        background-color: #4c1d95;
+        //padding: $spacing-6;
+
+    }
 
     .balance-large {
         font-size: $font-size-5xl;
@@ -40,24 +47,16 @@
         margin: $spacing-4 0;
     }
 
-    .coin-icon-wrapper {
-        width: 64px;
-        height: 64px;
-        @include flex-center;
-        color: $color-yellow-400;
-        filter: drop-shadow(0 4px 6px rgba(250, 204, 21, 0.4));
-    }
-
     .progress-bar {
         height: 8px;
-        background: $color-gray-100;
+        background: $color-gray;
         border-radius: $radius-full;
         margin-top: $spacing-2;
         overflow: hidden;
 
         .fill {
             height: 100%;
-            background: linear-gradient(90deg, $color-gray-300 0%, $color-gray-400 100%);
+            background: linear-gradient(90deg, $color-gray 0%, $color-gray 100%);
         }
     }
 }
@@ -87,7 +86,7 @@
             width: 32px;
             height: 32px;
             border-radius: $radius-full;
-            background: $color-gray-200;
+            background: $color-gray;
             color: $text-secondary;
             @include flex-center;
             font-size: $font-size-xs;
@@ -109,7 +108,7 @@
         padding: $spacing-3;
 
         &:hover {
-            background: $color-purple-700;
+            background: $primary-brand;
         }
 
         svg {
@@ -119,7 +118,7 @@
 }
 
 .spotlight-card {
-    background: linear-gradient(135deg, $color-purple-600 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, $primary-brand 0%, #3b82f6 100%);
     color: white;
     border: none;
     display: flex;

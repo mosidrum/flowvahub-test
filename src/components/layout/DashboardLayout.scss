@@ -16,7 +16,7 @@
     left: $spacing-4;
     z-index: 1000;
     background: $color-white;
-    border: 1px solid $color-gray-200;
+    border: 1px solid $border-color;
     border-radius: $radius-lg;
     padding: $spacing-2;
     cursor: pointer;
@@ -24,7 +24,7 @@
     transition: all $transition-fast;
 
     &:hover {
-        background-color: $color-gray-50;
+        background-color: $color-gray-light;
     }
 
     @include mobile {
@@ -117,14 +117,14 @@
     transition: background-color $transition-fast;
 
     &:hover {
-        background-color: $color-gray-50;
+        background-color: $color-gray-light;
     }
 
     .user-avatar {
         width: 40px;
         height: 40px;
         border-radius: $radius-full;
-        background-color: $color-gray-200;
+        background-color: $color-gray;
         overflow: hidden;
         flex-shrink: 0;
 
@@ -159,7 +159,7 @@
     left: $spacing-2;
     right: $spacing-2;
     background-color: $color-white;
-    border: 1px solid $color-gray-200;
+    border: 1px solid $border-color;
     border-radius: $radius-lg;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-bottom: $spacing-2;
@@ -192,7 +192,7 @@
         transition: all $transition-fast;
 
         &:hover {
-            background-color: $color-gray-50;
+            background-color: $color-gray-light;
         }
 
         svg {
@@ -201,10 +201,10 @@
     }
 
     &__logout {
-        color: $color-error;
+        color: $color-red;
 
         &:hover {
-            background-color: rgba($color-error, 0.05);
+            background-color: rgba($color-red, 0.05);
         }
     }
 }
@@ -225,16 +225,16 @@
     cursor: pointer;
 
     &:hover {
-        background-color: $color-gray-50;
+        background-color: $color-gray-light;
         color: $text-primary;
     }
 
     &--active {
-        background-color: $color-purple-100;
+        background-color: rgba($primary-brand, 0.1);
         color: $primary-brand;
 
         &:hover {
-            background-color: $color-purple-100;
+            background-color: rgba($primary-brand, 0.1);
         }
 
         svg {

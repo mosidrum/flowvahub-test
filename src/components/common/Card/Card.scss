@@ -7,7 +7,6 @@
     transition: all $transition-normal;
     position: relative;
 
-    // Variants
     &--default {
         background: $bg-surface;
         border: 1px solid $border-color;
@@ -22,24 +21,6 @@
         border: 1px solid $border-color;
     }
 
-    // Padding
-    &--padding-none {
-        padding: 0;
-    }
-
-    &--padding-sm {
-        padding: $spacing-3;
-    }
-
-    &--padding-md {
-        padding: $spacing-5;
-    }
-
-    &--padding-lg {
-        padding: $spacing-8;
-    }
-
-    // Modifiers
     &--hoverable {
         cursor: pointer;
 

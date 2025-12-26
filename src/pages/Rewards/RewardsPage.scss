@@ -41,7 +41,7 @@
             position: absolute;
             top: -2px;
             right: -2px;
-            background: $color-error;
+            background: $color-red;
             color: white;
             font-size: 10px;
             font-weight: bold;
@@ -75,7 +75,7 @@
 
     &.active {
         color: $primary-brand;
-        background-color: $color-purple-100;
+        background-color: rgba($primary-brand, 0.1);
         font-weight: $font-weight-semibold;
     }
 }

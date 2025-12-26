@@ -4,7 +4,7 @@
 .auth-container {
     @include flex-center;
     min-height: 100vh;
-    background-color: $color-purple-600;
+    background-color: $primary-brand;
     padding: $spacing-4;
 }
 
@@ -27,7 +27,7 @@
 
     h3 {
         margin-bottom: $spacing-2;
-        color: $color-purple-700;
+        color: $primary-brand;
     }
 
     p {
@@ -50,7 +50,7 @@
         display: block;
         font-size: $font-size-sm;
         font-weight: $font-weight-bold;
-        color: $color-gray-600;
+        color: $text-primary;
         margin-bottom: $spacing-2;
     }
 }
@@ -58,9 +58,9 @@
 .auth-input {
     width: 100%;
     padding: $spacing-3;
-    border: 1px solid $color-gray-200;
+    border: 1px solid $border-color;
     border-radius: $radius-xl;
-    background-color: $color-gray-50;
+    background-color: $color-gray-light;
     transition: all $transition-normal;
     font-family: inherit;
     display: block;
@@ -69,20 +69,20 @@
     &:focus {
         outline: none;
         border-color: transparent;
-        box-shadow: 0 0 0 2px $color-purple-500;
+        box-shadow: 0 0 0 2px rgba($primary-brand, 0.2);
     }
 
     &.error {
-        border-color: $color-error;
+        border-color: $color-red;
 
         &:focus {
-            box-shadow: 0 0 0 2px $color-error;
+            box-shadow: 0 0 0 2px rgba($color-red, 0.2);
         }
     }
 }
 
 .input-error-msg {
-    color: $color-error;
+    color: $color-red;
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
     margin-top: $spacing-2;
@@ -96,19 +96,19 @@
     top: 38px; // hardcoded to match label + spacing
     font-size: $font-size-xs;
     font-weight: $font-weight-bold;
-    color: $color-purple-500;
+    color: $primary-brand;
     background: none;
     border: none;
     cursor: pointer;
 
     &:hover {
-        color: $color-purple-700;
+        color: $primary-brand;
     }
 }
 
 .forgot-password-link {
     font-size: $font-size-sm;
-    color: $color-purple-600;
+    color: $primary-brand;
     font-weight: $font-weight-medium;
     text-decoration: none;
 
@@ -125,7 +125,7 @@
 
 .auth-error-banner {
     text-align: center;
-    color: $color-error;
+    color: $color-red;
     background-color: #fef2f2; // red-50
     border: 1px solid #fecaca; // red-200
     padding: $spacing-3;
@@ -141,17 +141,17 @@
     align-items: center;
     padding: $spacing-3;
     margin-top: $spacing-2;
-    background-color: $color-purple-600;
+    background-color: $primary-brand;
     color: $color-white;
     font-weight: $font-weight-bold;
     border-radius: $radius-full;
     font-size: $font-size-lg;
-    box-shadow: 0 10px 15px -3px rgba($color-purple-500, 0.4); // shadow-lg + purple tint
+    box-shadow: 0 10px 15px -3px rgba($primary-brand, 0.4); // shadow-lg + purple tint
     border: none;
     cursor: pointer;
 
     &:hover {
-        background-color: $color-purple-700;
+        background-color: $primary-brand;
     }
 
     &:disabled {
@@ -172,7 +172,7 @@
 
         span {
             width: 100%;
-            border-top: 1px solid $color-gray-200;
+            border-top: 1px solid $border-color;
         }
     }
 
@@ -186,7 +186,7 @@
         span {
             background-color: $color-white;
             padding: 0 $spacing-2;
-            color: $color-gray-400;
+            color: $text-tertiary;
             font-weight: $font-weight-medium;
         }
     }
@@ -197,16 +197,16 @@
     @include flex-center;
     gap: $spacing-2;
     padding: $spacing-3;
-    border: 1px solid $color-gray-200;
+    border: 1px solid $border-color;
     border-radius: $radius-xl;
     background-color: $color-white;
-    color: $color-gray-600; // gray-700
+    color: $text-primary;
     font-weight: $font-weight-medium;
     transition: background-color $transition-fast;
     cursor: pointer;
 
     &:hover {
-        background-color: $color-gray-50;
+        background-color: $color-gray-light;
     }
 
     svg {
@@ -220,7 +220,7 @@
     margin-top: $spacing-2;
 
     a {
-        color: $color-purple-600;
+        color: $primary-brand;
         font-weight: $font-weight-bold;
         text-decoration: none;
 
@@ -233,14 +233,14 @@
 .password-requirements {
     margin-top: $spacing-3;
     padding: $spacing-3;
-    background-color: $color-gray-50;
+    background-color: $color-gray-light;
     border-radius: $radius-md; // rounded-lg
-    border: 1px solid $color-gray-200;
+    border: 1px solid $border-color;
 
     p {
         font-size: $font-size-xs;
         font-weight: $font-weight-bold;
-        color: $color-gray-600; // gray-700
+        color: $text-primary;
         margin-bottom: $spacing-2;
     }
 
@@ -252,11 +252,11 @@
         margin-bottom: 2px;
 
         &.valid {
-            color: $color-green-500; // green-600
+            color: $color-green;
         }
 
         &.invalid {
-            color: $color-gray-500;
+            color: $text-tertiary;
         }
 
         .status-icon {
@@ -270,11 +270,11 @@
             font-size: 0.75rem;
 
             &.valid {
-                background-color: $color-green-500;
+                background-color: $color-green;
             }
 
             &.invalid {
-                background-color: $color-gray-300;
+                background-color: $text-tertiary;
             }
         }
     }

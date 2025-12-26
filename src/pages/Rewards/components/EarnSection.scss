@@ -15,7 +15,7 @@
     width: 40px;
     height: 40px;
     border-radius: $radius-full;
-    border: 1px solid $color-purple-100;
+    border: 1px solid rgba($primary-brand, 0.2);
     @include flex-center;
     flex-shrink: 0;
 }
@@ -24,7 +24,7 @@
     width: 40px;
     height: 40px;
     border-radius: $radius-full;
-    background: $color-purple-100;
+    background: rgba($primary-brand, 0.1);
     @include flex-center;
     flex-shrink: 0;
 }

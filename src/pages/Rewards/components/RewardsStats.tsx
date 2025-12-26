@@ -27,9 +27,9 @@ export const RewardsStats: React.FC<RewardsStatsProps> = ({ points, streak, onCh
             </div>
 
             <div className="journey-grid">
-                <Card className="points-balance-card" hoverable>
-                    <div className="balance-left">
-                        <div className="flex items-center gap-2 mb-2">
+                <Card  hoverable>
+                    <div className="points-balance-card">
+                        <div className="flex items-center gap-2 mb-2 top">
                             <div className="p-1 rounded bg-purple-100 text-purple-600">
                                 <Award size={16} className="text-purple-600" />
                             </div>
