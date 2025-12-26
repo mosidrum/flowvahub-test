@@ -47,7 +47,7 @@
 }
 
 .sidebar {
-    width: 260px;
+    width: 240px;
     background-color: $bg-sidebar;
     border-right: none;
     padding: $spacing-6 $spacing-4;
@@ -55,6 +55,7 @@
     flex-direction: column;
     flex-shrink: 0;
     transition: transform $transition-normal;
+    border-right: 1px solid rgb(229, 231, 235);
 
     @include mobile {
         position: fixed;
@@ -78,9 +79,7 @@
         padding-left: $spacing-2;
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            color: $primary-brand;
+            width: 80%;
         }
 
         .logo-text {
@@ -249,7 +248,8 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    background-color: $bg-app;
+    background-color: #f9fafb;
+
 }
 
 .page-content {
@@ -259,6 +259,5 @@
 
     @include mobile {
         padding: $spacing-6;
-        padding-top: $spacing-6;
     }
 }

@@ -14,16 +14,7 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './DashboardLayout.scss';
-
-// Logo Icon Component (Simplified Flowva Logo representation)
-const FlowvaLogo = () => (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 2.5C10 2.5 5 7 5 12C5 17 9 21 9 26H23C23 21 27 17 27 12C27 7 22 2.5 16 2.5Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M11 14C11 14 13 16 16 16C19 16 21 14 21 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="9" cy="22" r="3" stroke="currentColor" strokeWidth="2.5" />
-        <circle cx="23" cy="22" r="3" stroke="currentColor" strokeWidth="2.5" />
-    </svg>
-);
+import logo from '../../assets/logo.png';
 
 interface DashboardLayoutProps {
     children: ReactNode;
@@ -47,11 +38,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
     const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
     const profileMenuRef = useRef<HTMLDivElement>(null);
 
-    // Extract user name from email or use default
     const userName = user?.user_metadata?.name || user?.email?.split('@')[0] || 'User';
     const userEmail = user?.email || 'user@example.com';
 
-    // Handle window resize to detect mobile
     useEffect(() => {
         const handleResize = () => {
             const mobile = window.innerWidth <= 640;
@@ -63,7 +52,6 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Close profile menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
@@ -82,18 +70,15 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
 
     return (
         <div className="dashboard-layout">
-            {/* Mobile Menu Toggle */}
             <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
                 {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
-            {/* Sidebar Overlay for Mobile */}
             {sidebarOpen && isMobile && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
 
             <aside className={`sidebar ${sidebarOpen ? 'sidebar--open' : ''}`}>
                 <div className="sidebar__logo">
-                    <div className="logo-icon"><FlowvaLogo /></div>
-                    <span className="logo-text">Flowva</span>
+                    <img src={logo} className="logo-icon" alt="Flowva Logo" />
                 </div>
 
                 <nav className="sidebar__nav">

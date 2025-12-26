@@ -6,6 +6,8 @@ import { EarnSection } from './components/EarnSection';
 import { ReferralSection } from './components/ReferralSection';
 import { RewardList } from './components/RewardList';
 import './RewardsPage.scss';
+import {Text} from "../../components/common/Text/Text.tsx";
+import {Bell} from "lucide-react";
 
 export const RewardsPage: React.FC = () => {
     const {
@@ -30,7 +32,21 @@ export const RewardsPage: React.FC = () => {
 
     return (
         <div className="rewards-page">
-            <RewardsHeader />
+            <header className="rewards-header">
+                <div className="header-top-row">
+                    <div>
+                        <Text variant="h4" className="mt-12">Rewards Hub</Text>
+                        <Text variant="body" color="secondary" className="page-subtitle">
+                            Earn points, unlock rewards, and celebrate your progress!
+                        </Text>
+                    </div>
+
+                    <div className="notification-bell">
+                        <Bell size={20} />
+                        <div className="badge">1</div>
+                    </div>
+                </div>
+            </header>
 
             <div className="header-tabs">
                 <button

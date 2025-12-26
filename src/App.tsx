@@ -20,7 +20,6 @@ const App = () => {
     return (
         <Router>
             <Routes>
-                {/* Public Routes */}
                 <Route
                     path="/login"
                     element={!user ? <LoginPage /> : <Navigate to="/dashboard/earn-rewards" replace />}
@@ -30,7 +29,6 @@ const App = () => {
                     element={!user ? <SignupPage /> : <Navigate to="/dashboard/earn-rewards" replace />}
                 />
 
-                {/* Protected Routes */}
                 <Route
                     path="/dashboard/*"
                     element={
@@ -47,7 +45,6 @@ const App = () => {
                     }
                 />
 
-                {/* Root Redirect */}
                 <Route
                     path="/"
                     element={<Navigate to={user ? "/dashboard/earn-rewards" : "/login"} replace />}
